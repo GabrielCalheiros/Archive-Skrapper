@@ -380,7 +380,7 @@ if __name__ == "__main__":
             
     clear_screen()
 
-    skrape_livros_arquitetura()
+    # skrape_livros_arquitetura()
     
     # item = internetarchive.get_item('archeology0000mcin')
     # for k, v in item.metadata.items():
