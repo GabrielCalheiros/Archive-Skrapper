@@ -166,7 +166,6 @@ def collection_downloader_each_year(querry, path, start_index=0, end_index=None)
             if i >= end_index:
                 break
             
-            
             item = internetarchive.get_item(result['identifier'])
             
             counter_string = equalize_char_number(str(i), str(search.num_found))
