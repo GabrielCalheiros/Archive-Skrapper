@@ -35,7 +35,6 @@ def collection_downloader(querry, path, start_index=0, end_index=None):
             if i >= end_index:
                 break
             
-            
             item = internetarchive.get_item(result['identifier'])
             
             counter_string = equalize_char_number(str(i), str(search.num_found))
@@ -96,7 +95,6 @@ def collection_downloader(querry, path, start_index=0, end_index=None):
             # If concluded_percentage has less than 6 digits, add leading zeros
             if len(Concluded_percentage) < 6:
                 Concluded_percentage = Concluded_percentage.zfill(6)
-            
 
             line = f"Item {counter_string} of {search.num_found} found. ({Concluded_percentage}%) -> Title: {title} | Mediatype: {mediatype}"
 
@@ -139,7 +137,6 @@ def collection_downloader(querry, path, start_index=0, end_index=None):
             print(f"Error: {e}")
             pass
     return collection_querry
-
 
 def collection_downloader_each_year(querry, path, start_index=0, end_index=None):    
     
@@ -272,7 +269,6 @@ def collection_downloader_each_year(querry, path, start_index=0, end_index=None)
             pass
     return collection_querry
 
-
 ################################################## AUXILIAR FUNCTIONS ##########################################################   
 def equalize_char_number(smaller_number, bigger_number):
     # Add zeros to the smaller number until it has the same number of characters as the bigger number
@@ -333,7 +329,6 @@ def clear_dataframe(collection):
     
     return collection
 
-
 def skrape_livros_arquitetura():
     
     # Create an array from 1400 to 1600
@@ -378,13 +373,15 @@ def skrape_livros_arquitetura():
 if __name__ == "__main__":
             
     clear_screen()
+    
+    print("Starting...")
 
     # skrape_livros_arquitetura()
     
-    # item = internetarchive.get_item('archeology0000mcin')
-    # for k, v in item.metadata.items():
-    #     print(f"{k}:{v}")
-    # input("Press Enter to continue...")
+    item = internetarchive.get_item('metal-hurlant-3.')
+    for k, v in item.metadata.items():
+        print(f"{k}:{v}")
+    input("Press Enter to continue...")
 
     
     already_skraped = [
@@ -412,9 +409,12 @@ if __name__ == "__main__":
         f'collection:comics_inbox languageSorter:Portuguese mediatype:texts',
         f'collection:comics languageSorter:Portuguese mediatype:texts',
         f'collection:comics languageSorter:English mediatype:texts',
+        f'collection:altcensored',
     ]
 
     querries = [
+        # f'uploader:rynking78@gmail.com collection:comics subject:"heavy metal"',
+        f'collection:comics subject:"Metal Hurlant"',
         # f'uploader:station58.cebu@archive.org',
         # f'collection:comics_inbox languageSorter:English mediatype:texts',
         # f'subject:architecture mediatype:texts date:1140',
@@ -422,7 +422,6 @@ if __name__ == "__main__":
         # f'collection:magazine_rack languageSorter:English mediatype:texts',                     # Magazine Rack [English]            Results Count: 183.218
         # f'collection:pulpmagazinearchive languageSorter:English mediatype:texts',               # Pulp Magazine Archive [English]    Results Count:  13.744
         # ---------------------------------------------------------------------------------------------------------------------------------------------------------------
-        # f'collection:altcensored',                                                              # Alt Censored                       Results Count: 781.895
         # ---------------------------------------------------------------------------------------------------------------------------------------------------------------
         # f'collection:opensource_movies languageSorter:English',                                 # OpenSource Movies [English]        Results Count: 293.266
         # ---------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -434,7 +433,7 @@ if __name__ == "__main__":
 
         start_index = 0
         
-        end_index = 10000
+        end_index = 5000
                 
         collection = collection_downloader(querry, './', start_index, end_index)
 
@@ -447,4 +446,3 @@ if __name__ == "__main__":
         # If dataframe is not empty, save it to an excel file
         if not collection.empty:
             savecollection_to_excel(collection, file_path)
-
