@@ -378,7 +378,7 @@ if __name__ == "__main__":
 
     # skrape_livros_arquitetura()
     
-    item = internetarchive.get_item('metal-hurlant-3.')
+    item = internetarchive.get_item('plinio-salgado-psicologia-da-revolucao')
     for k, v in item.metadata.items():
         print(f"{k}:{v}")
     input("Press Enter to continue...")
@@ -414,7 +414,8 @@ if __name__ == "__main__":
 
     querries = [
         # f'uploader:rynking78@gmail.com collection:comics subject:"heavy metal"',
-        f'collection:comics subject:"Metal Hurlant"',
+        f'creator:"Plínio Salgado"',
+        # f'collection:comics subject:"Metal Hurlant"',
         # f'uploader:station58.cebu@archive.org',
         # f'collection:comics_inbox languageSorter:English mediatype:texts',
         # f'subject:architecture mediatype:texts date:1140',
