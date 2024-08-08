@@ -297,7 +297,13 @@ def clear_querry_name(querry_name):
     querry_name = querry_name.replace('languageSorter:', '')
     querry_name = querry_name.replace('mediatype:', '')
     querry_name = querry_name.replace('uploader:', '')
+    querry_name = querry_name.replace('creator:', '')
+    querry_name = querry_name.replace('subject:', '')
     querry_name = querry_name.replace(' ', '')
+    querry_name = querry_name.replace('"', '')
+    querry_name = querry_name.replace(",", '')
+    querry_name = querry_name.replace(".", '')
+
     
     # Remove everything after @ in the querry name if it exists
     if '@' in querry_name:
@@ -378,10 +384,10 @@ if __name__ == "__main__":
 
     # skrape_livros_arquitetura()
     
-    item = internetarchive.get_item('plinio-salgado-psicologia-da-revolucao')
-    for k, v in item.metadata.items():
-        print(f"{k}:{v}")
-    input("Press Enter to continue...")
+    # item = internetarchive.get_item('documentrioarquijoswii')
+    # for k, v in item.metadata.items():
+    #     print(f"{k}:{v}")
+    # input("Press Enter to continue...")
 
     
     already_skraped = [
@@ -410,11 +416,43 @@ if __name__ == "__main__":
         f'collection:comics languageSorter:Portuguese mediatype:texts',
         f'collection:comics languageSorter:English mediatype:texts',
         f'collection:altcensored',
+        f'uploader:alvaro.toledo11@hotmail.com mediatype:texts',
+
+        
+        
+        f'creator:"Plínio Salgado"  mediatype:texts',
+        f'creator:"Gustavo Barroso" mediatype:texts',
+        f'creator:"Miguel Reale" mediatype:texts',
+        f'creator:"Sérgio Oliveira" mediatype:texts',
+        f'creator:"Roberto Gama e Silva" mediatype:texts',
+        f'creator:"Miguel Serrano" mediatype:texts',
+        f'creator:"Julius Evola" mediatype:texts',
+        f'creator:"Corneliu Zelea Codreanu" mediatype:texts',
+        f'creator:"Oswald Mosley" mediatype:texts',
+        f'creator:"David Irving" mediatype:texts',
+        f'creator:"Alberto Torres" mediatype:texts',
+        f'creator:"Dom Vital" mediatype:texts',
+        f'creator:"JONES, E. Michael"  mediatype:texts',
+        f'creator:"Cândido Mendes de Almeida"  mediatype:texts',
+        f'subject:"Terry, Quinlan, 1937-"',
+        f'creator:"Krier, Leon"',
+        f'creator:"Krier, Rob"',
+        f'subject:"Alexander, Christopher" mediatype:texts',
+        f'creator:"Millais, Malcolm"  mediatype:texts',
+        f'creator:"Tom Wolfe"  mediatype:texts',
+        f'creator:"Salingaros, Nikos Angelos"  mediatype:texts',
+
+        f'subject:"Decoração e ornamentos (arquitetura)"',
+
+
+
     ]
 
     querries = [
-        # f'uploader:rynking78@gmail.com collection:comics subject:"heavy metal"',
-        f'creator:"Plínio Salgado"',
+        f'uploader:volunteer-gabriela-carvalho@archive.org',
+        f'subject:"Mapas de Portugal" mediatype:texts',
+        f'subject:"Mapas do Brasil" mediatype:texts',
+        f'collection:memoriaestatisticadobrasil mediatype:texts',
         # f'collection:comics subject:"Metal Hurlant"',
         # f'uploader:station58.cebu@archive.org',
         # f'collection:comics_inbox languageSorter:English mediatype:texts',
