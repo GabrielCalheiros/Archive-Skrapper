@@ -66,7 +66,7 @@ def collection_downloader(querry, path, start_index=0, end_index=None):
             if 'creator'                in item.metadata: creator = str(item.metadata['creator'])
             if 'ocr_converted'          in item.metadata: ocr_converted = str(item.metadata['ocr_converted'])
             if 'year'                   in item.metadata: year = str(item.metadata['year'])
-            if 'ocr              '      in item.metadata: ocr_detected_lang = str(item.metadata['ocr_detected_lang'])
+            if 'ocr'                    in item.metadata: ocr_detected_lang = str(item.metadata['ocr_detected_lang'])
             if 'page_number_confidence' in item.metadata: page_number_confidence = str(item.metadata['page_number_confidence'])
             if 'originalurl'            in item.metadata: originalurl = str(item.metadata['originalurl'])
             if 'publisher'              in item.metadata: publisher = str(item.metadata['publisher'])
@@ -384,10 +384,10 @@ if __name__ == "__main__":
 
     # skrape_livros_arquitetura()
     
-    # item = internetarchive.get_item('documentrioarquijoswii')
-    # for k, v in item.metadata.items():
-    #     print(f"{k}:{v}")
-    # input("Press Enter to continue...")
+    item = internetarchive.get_item('proven-at-nuremberg-true-holocaust-remembrance')
+    for k, v in item.metadata.items():
+        print(f"{k}:{v}")
+    input("Press Enter to continue...")
 
     
     already_skraped = [
@@ -444,15 +444,16 @@ if __name__ == "__main__":
 
         f'subject:"Decoração e ornamentos (arquitetura)"',
 
-
-
     ]
 
     querries = [
-        f'uploader:volunteer-gabriela-carvalho@archive.org',
-        f'subject:"Mapas de Portugal" mediatype:texts',
-        f'subject:"Mapas do Brasil" mediatype:texts',
-        f'collection:memoriaestatisticadobrasil mediatype:texts',
+        f'creator:"Ryan Faulk"',
+        f'creator:"Alternative Hypothesis"',
+        f'subject:"Alternative Hypothesis"',
+        f'subject:"Holocaust Revisionism"',
+        f'subject:"Holocaust Denial"',
+        f'uploader:donavan.estes@outlook.com',
+
         # f'collection:comics subject:"Metal Hurlant"',
         # f'uploader:station58.cebu@archive.org',
         # f'collection:comics_inbox languageSorter:English mediatype:texts',
