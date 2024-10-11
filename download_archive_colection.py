@@ -338,7 +338,7 @@ def clear_dataframe(collection):
 def skrape_livros_arquitetura():
     
     # Create an array from 1400 to 1600
-    years = [str(i) for i in range(1800, 1951)]
+    years = [str(i) for i in range(1600, 1700)]
             
     years_error = []
     
@@ -348,7 +348,7 @@ def skrape_livros_arquitetura():
         start_index = 0
         end_index = 30000
         try:
-            now_collection_year = collection_downloader_each_year(f'languageSorter:Portuguese mediatype:texts year:{year}', './', start_index, end_index)
+            now_collection_year = collection_downloader_each_year(f'subject:Portuguese mediatype:texts year:{year}', './', start_index, end_index)
             
             # Add them both to the collection
             collection = pd.concat([collection, now_collection_year])
@@ -371,7 +371,7 @@ def skrape_livros_arquitetura():
         return
      
     # Save the collection to an excel file
-    savecollection_to_excel(collection, f"C:\\Users\\gabriel.miranda\\Desktop\\Projetos\\Personal Github\\Archive-Skrapper\\Livros_portugues_collection_{first_year}-{last_year}.xlsx")
+    savecollection_to_excel(collection, f"C:\\Users\\gabriel.miranda\\Desktop\\Projetos\\Personal Github\\Archive-Skrapper\\Livros_subject_collection_{first_year}-{last_year}.xlsx")
     print("Years Error: ", years_error)
 
 ################################################## MAIN LOOP ################################################################### 
@@ -382,13 +382,12 @@ if __name__ == "__main__":
     
     print("Starting...")
 
-    # skrape_livros_arquitetura()
+    skrape_livros_arquitetura()
     
-    item = internetarchive.get_item('proven-at-nuremberg-true-holocaust-remembrance')
-    for k, v in item.metadata.items():
-        print(f"{k}:{v}")
-    input("Press Enter to continue...")
-
+    # item = internetarchive.get_item('proven-at-nuremberg-true-holocaust-remembrance')
+    # for k, v in item.metadata.items():
+    #     print(f"{k}:{v}")
+    # input("Press Enter to continue...")
     
     already_skraped = [
         f'collection:fringe languageSorter:Portuguese mediatype:texts',
@@ -417,9 +416,6 @@ if __name__ == "__main__":
         f'collection:comics languageSorter:English mediatype:texts',
         f'collection:altcensored',
         f'uploader:alvaro.toledo11@hotmail.com mediatype:texts',
-
-        
-        
         f'creator:"Plínio Salgado"  mediatype:texts',
         f'creator:"Gustavo Barroso" mediatype:texts',
         f'creator:"Miguel Reale" mediatype:texts',
@@ -441,19 +437,10 @@ if __name__ == "__main__":
         f'creator:"Millais, Malcolm"  mediatype:texts',
         f'creator:"Tom Wolfe"  mediatype:texts',
         f'creator:"Salingaros, Nikos Angelos"  mediatype:texts',
-
         f'subject:"Decoração e ornamentos (arquitetura)"',
-
     ]
 
     querries = [
-        f'creator:"Ryan Faulk"',
-        f'creator:"Alternative Hypothesis"',
-        f'subject:"Alternative Hypothesis"',
-        f'subject:"Holocaust Revisionism"',
-        f'subject:"Holocaust Denial"',
-        f'uploader:donavan.estes@outlook.com',
-
         # f'collection:comics subject:"Metal Hurlant"',
         # f'uploader:station58.cebu@archive.org',
         # f'collection:comics_inbox languageSorter:English mediatype:texts',
@@ -486,3 +473,6 @@ if __name__ == "__main__":
         # If dataframe is not empty, save it to an excel file
         if not collection.empty:
             savecollection_to_excel(collection, file_path)
+            
+            
+            
