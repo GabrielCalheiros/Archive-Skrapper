@@ -338,7 +338,7 @@ def clear_dataframe(collection):
 def skrape_livros_arquitetura():
     
     # Create an array from 1400 to 1600
-    years = [str(i) for i in range(1600, 1700)]
+    years = [str(i) for i in range(1400, 1600)]
             
     years_error = []
     
@@ -473,6 +473,3 @@ if __name__ == "__main__":
         # If dataframe is not empty, save it to an excel file
         if not collection.empty:
             savecollection_to_excel(collection, file_path)
-            
-            
-            
