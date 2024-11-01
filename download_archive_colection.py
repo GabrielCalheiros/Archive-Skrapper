@@ -166,12 +166,7 @@ def collection_downloader_each_year(querry, path, start_index=0, end_index=None)
             item = internetarchive.get_item(result['identifier'])
             
             counter_string = equalize_char_number(str(i), str(search.num_found))
-            
-            # # Print the item entire metadata        
-            # for k, v in item.metadata.items():
-            #     print(f"{k}:{v}")
-            # input("Press Enter to continue...")
-                
+                            
             # Get the Metadata
             index = counter_string
             identifier = str(item.identifier)
@@ -338,7 +333,7 @@ def clear_dataframe(collection):
 def skrape_livros_arquitetura():
     
     # Create an array from 1400 to 1600
-    years = [str(i) for i in range(1400, 1600)]
+    years = [str(i) for i in range(1850, 1900)]
             
     years_error = []
     
@@ -348,7 +343,7 @@ def skrape_livros_arquitetura():
         start_index = 0
         end_index = 30000
         try:
-            now_collection_year = collection_downloader_each_year(f'subject:Portuguese mediatype:texts year:{year}', './', start_index, end_index)
+            now_collection_year = collection_downloader_each_year(f'subject:Brazil mediatype:texts year:{year}', './', start_index, end_index)
             
             # Add them both to the collection
             collection = pd.concat([collection, now_collection_year])
@@ -382,13 +377,13 @@ if __name__ == "__main__":
     
     print("Starting...")
 
-    skrape_livros_arquitetura()
+    # skrape_livros_arquitetura()
     
-    # item = internetarchive.get_item('proven-at-nuremberg-true-holocaust-remembrance')
-    # for k, v in item.metadata.items():
-    #     print(f"{k}:{v}")
-    # input("Press Enter to continue...")
-    
+    item = internetarchive.get_item('BloodLibelRitualMurder')
+    for k, v in item.metadata.items():
+        print(f"{k}:{v}")
+    input("Press Enter to continue...")
+
     already_skraped = [
         f'collection:fringe languageSorter:Portuguese mediatype:texts',
         f'collection:magazine_rack languageSorter:Portuguese mediatype:texts',
@@ -438,18 +433,18 @@ if __name__ == "__main__":
         f'creator:"Tom Wolfe"  mediatype:texts',
         f'creator:"Salingaros, Nikos Angelos"  mediatype:texts',
         f'subject:"Decoração e ornamentos (arquitetura)"',
+        f'collection:lost-telecourses',
+        f'collection:comics subject:"Metal Hurlant"',
+
     ]
 
     querries = [
-        # f'collection:comics subject:"Metal Hurlant"',
+        f'collection:fav-unfortunateson',
+        f'uploader:contacttheorem@gmail.com',
         # f'uploader:station58.cebu@archive.org',
         # f'collection:comics_inbox languageSorter:English mediatype:texts',
-        # f'subject:architecture mediatype:texts date:1140',
-        # ---------------------------------------------------------------------------------------------------------------------------------------------------------------
         # f'collection:magazine_rack languageSorter:English mediatype:texts',                     # Magazine Rack [English]            Results Count: 183.218
         # f'collection:pulpmagazinearchive languageSorter:English mediatype:texts',               # Pulp Magazine Archive [English]    Results Count:  13.744
-        # ---------------------------------------------------------------------------------------------------------------------------------------------------------------
-        # ---------------------------------------------------------------------------------------------------------------------------------------------------------------
         # f'collection:opensource_movies languageSorter:English',                                 # OpenSource Movies [English]        Results Count: 293.266
         # ---------------------------------------------------------------------------------------------------------------------------------------------------------------
         ]
@@ -473,3 +468,28 @@ if __name__ == "__main__":
         # If dataframe is not empty, save it to an excel file
         if not collection.empty:
             savecollection_to_excel(collection, file_path)
+
+
+
+
+# 𝙍𝙚𝙨𝙚𝙖𝙧𝙘𝙝 𝘼𝙪𝙙𝙞𝙤 + 𝙋𝘿𝙁𝙨: https://bit.ly/PDFdump
+
+# 𝘾𝙝𝙞𝙡𝙙 𝘼𝙗𝙪𝙨𝙚 / 𝙃𝙪𝙢𝙖𝙣 𝙏𝙧𝙖𝙛𝙛𝙞𝙘𝙠𝙞𝙣𝙜 / 𝙍𝙞𝙩𝙪𝙖𝙡 𝘼𝙗𝙪𝙨𝙚 𝙋𝙡𝙖𝙮𝙡𝙞𝙨𝙩: https://youtube.com/playlist?list=PLQdiHk246wHtR5NqldSV43q4a-89namWt
+
+# 𝙃𝙚𝙖𝙡𝙩𝙝 & 𝙒𝙚𝙡𝙡𝙗𝙚𝙞𝙣𝙜 𝙋𝙡𝙖𝙮𝙡𝙞𝙨𝙩: https://youtube.com/playlist?list=PLQdiHk246wHurz6sjv-uK6oit2lvuADDC
+
+# 𝙃𝙞𝙨𝙩𝙤𝙧𝙮 𝙋𝙡𝙖𝙮𝙡𝙞𝙨𝙩: https://youtube.com/playlist?list=PLQdiHk246wHtb9Zlafs15J7v1fmZys5BF
+
+# 𝙃𝙤𝙡𝙡𝙮𝙬𝙤𝙤𝙙 / 𝙈𝙪𝙨𝙞𝙘 𝙄𝙣𝙙𝙪𝙨𝙩𝙧𝙮 / 𝙈𝙖𝙞𝙣𝙨𝙩𝙧𝙚𝙖𝙢 & 𝙎𝙤𝙘𝙞𝙖𝙡 𝙈𝙚𝙙𝙞𝙖 𝙋𝙡𝙖𝙮𝙡𝙞𝙨𝙩: https://youtube.com/playlist?list=PLQdiHk246wHsaQJ-8EcWHWgpNhbBqi5jM
+
+# 𝙅𝙚𝙨𝙪𝙞𝙩𝙨 (𝙎𝙤𝙘𝙞𝙚𝙩𝙮 𝙤𝙛 𝙅𝙚𝙨𝙪𝙨) 𝙋𝙡𝙖𝙮𝙡𝙞𝙨𝙩: https://youtube.com/playlist?list=PLQdiHk246wHsRz2Bw_B642XTf-22LHGCV
+
+# 𝙈𝙖𝙣𝙡𝙮 𝙋. 𝙃𝙖𝙡𝙡 𝙋𝙡𝙖𝙮𝙡𝙞𝙨𝙩: https://youtube.com/playlist?list=PLQdiHk246wHsKNfoF_i9cs53WP1x2ZBbO
+
+# 𝙍𝙚𝙖𝙡𝙞𝙩𝙮 𝘾𝙝𝙚𝙘𝙠 (𝙋𝙚𝙧𝙨𝙥𝙚𝙘𝙩𝙞𝙫𝙚) 𝙋𝙡𝙖𝙮𝙡𝙞𝙨𝙩: https://youtube.com/playlist?list=PLQdiHk246wHv-ZReEJDv_9dLOLQOwughq
+
+# 𝙍𝙚𝙡𝙞𝙜𝙞𝙤𝙣 / 𝙏𝙝𝙚𝙤𝙡𝙤𝙜𝙮 𝙋𝙡𝙖𝙮𝙡𝙞𝙨𝙩: https://youtube.com/playlist?list=PLQdiHk246wHtvo0YoF7zwDLZYxUkC2lyn
+
+# 𝙎𝙚𝙘𝙧𝙚𝙩𝙨 𝙄𝙣 𝙋𝙡𝙖𝙞𝙣 𝙎𝙞𝙜𝙝𝙩 𝙋𝙡𝙖𝙮𝙡𝙞𝙨𝙩: https://youtube.com/playlist?list=PLQdiHk246wHujBQown4BVcDxQtXZz-VRL
+
+# 𝙎𝙪𝙧𝙫𝙞𝙫𝙤𝙧𝙨 𝙤𝙛 𝘼𝙩𝙡𝙖𝙣𝙩𝙞𝙨 𝙋𝙡𝙖𝙮𝙡𝙞𝙨𝙩: https://youtube.com/playlist?list=PLQdiHk246wHtdN1bQeuJVLmJcj4FbQ_QG
