@@ -6,55 +6,55 @@ import pandas as pd
 import tabulate
 
 ################################################## ARCHIVE FUNCTIONS ###########################################################
-def collection_downloader(querry, path, start_index=0, end_index=None):    
-    
+def collection_downloader(querry, path, start_index=0, end_index=None):
+
     search = internetarchive.search_items(querry)
-    
+
     # Declares an array to store the identifiers of the items in the collection
     identifiers = []
-    
+
     # Initiate the DataFrame
     collection_querry = pd.DataFrame()
-    
+
     # Counters
     counter = 0
-    
+
     print("\n\n")
     print_line()
     print(f"Querry: {querry}")
     print(f"Path: {path}")
     print(f"Results Count: {search.num_found}")
-    
+
     end_index = end_index or search.num_found
 
     for i, result in enumerate(search.iter_as_results()):
-        
+
         try:
             if i < start_index:
                 continue
             if i >= end_index:
                 break
-            
+
             item = internetarchive.get_item(result['identifier'])
-            
+
             counter_string = equalize_char_number(str(i), str(search.num_found))
-            
-            # # Print the item entire metadata        
+
+            # # Print the item entire metadata
             # for k, v in item.metadata.items():
             #     print(f"{k}:{v}")
             # input("Press Enter to continue...")
-                
+
             # Get the Metadata
             index = counter_string
             identifier = str(item.identifier)
             title = str(item.metadata['title'])
-            
+
             # Initialize variables for optional metadata
             collection = mediatype = uploader = language = subject = publicdate = None
             addeddate = date = creator = ocr_converted = year = None
             ocr_detected_lang = page_number_confidence = originalurl = publisher = ppi = None
             source = director = runtime = format = closed_captioning = description = None
-            
+
             if 'collection'             in item.metadata: collection = str(item.metadata['collection'])
             if 'mediatype'              in item.metadata: mediatype = str(item.metadata['mediatype'])
             if 'uploader'               in item.metadata: uploader = str(item.metadata['uploader'])
@@ -76,7 +76,7 @@ def collection_downloader(querry, path, start_index=0, end_index=None):
             if 'runtime'                in item.metadata: runtime = str(item.metadata['runtime'])
             if 'format'                 in item.metadata: format = str(item.metadata['format'])
             if 'closed_captioning'      in item.metadata: closed_captioning = str(item.metadata['closed_captioning'])
-            
+
             if 'description' in item.metadata:
                 description = item.metadata['description']
                 if isinstance(description, list):
@@ -86,12 +86,12 @@ def collection_downloader(querry, path, start_index=0, end_index=None):
                 # Remove new lines
                 description = description.replace('\n', ' ')
                 # print(f"Description: {description}")
-                
+
             Concluded_percentage = str(round((counter / search.num_found) * 100, 2))
-            
+
             if Concluded_percentage == '0.0':
                 Concluded_percentage = '000.01'
-            
+
             # If concluded_percentage has less than 6 digits, add leading zeros
             if len(Concluded_percentage) < 6:
                 Concluded_percentage = Concluded_percentage.zfill(6)
@@ -121,10 +121,10 @@ def collection_downloader(querry, path, start_index=0, end_index=None):
                 'Ppi': ppi,
                 'Description': description
                 })
-            
+
             # Add the current item metadata to the collection
             collection_querry = pd.concat([collection_querry, new_Row.to_frame().T], ignore_index=True)
-            
+
             # Print the line
             print(line)
 
@@ -132,52 +132,52 @@ def collection_downloader(querry, path, start_index=0, end_index=None):
             # item.download(glob_pattern='*pdf', verbose=True, no_directory=True)
 
             counter += 1
-            
+
         except Exception as e:
             print(f"Error: {e}")
             pass
     return collection_querry
 
-def collection_downloader_each_year(querry, path, start_index=0, end_index=None):    
-    
+def collection_downloader_each_year(querry, path, start_index=0, end_index=None):
+
     search = internetarchive.search_items(querry)
-    
+
     # Declares an array to store the identifiers of the items in the collection
     identifiers = []
-    
+
     # Initiate the DataFrame
     collection_querry = pd.DataFrame()
-    
+
     # Counters
     counter = 0
-    
+
     print(f"Querry: {querry} | Path: {path} | Start: {start_index} | End: {end_index} | Results Count: {search.num_found}")
-    
+
     end_index = end_index or search.num_found
 
     for i, result in enumerate(search.iter_as_results()):
-        
+
         try:
             if i < start_index:
                 continue
             if i >= end_index:
                 break
-            
+
             item = internetarchive.get_item(result['identifier'])
-            
+
             counter_string = equalize_char_number(str(i), str(search.num_found))
-                            
+
             # Get the Metadata
             index = counter_string
             identifier = str(item.identifier)
             title = str(item.metadata['title'])
-            
+
             # Initialize variables for optional metadata
             collection = mediatype = uploader = language = subject = publicdate = None
             addeddate = date = creator = ocr_converted = year = None
             ocr_detected_lang = page_number_confidence = originalurl = publisher = ppi = None
             source = director = runtime = format = closed_captioning = description = None
-            
+
             if 'collection'             in item.metadata: collection = str(item.metadata['collection'])
             if 'mediatype'              in item.metadata: mediatype = str(item.metadata['mediatype'])
             if 'uploader'               in item.metadata: uploader = str(item.metadata['uploader'])
@@ -199,7 +199,7 @@ def collection_downloader_each_year(querry, path, start_index=0, end_index=None)
             if 'runtime'                in item.metadata: runtime = str(item.metadata['runtime'])
             if 'format'                 in item.metadata: format = str(item.metadata['format'])
             if 'closed_captioning'      in item.metadata: closed_captioning = str(item.metadata['closed_captioning'])
-            
+
             if 'description' in item.metadata:
                 description = item.metadata['description']
                 if isinstance(description, list):
@@ -209,19 +209,19 @@ def collection_downloader_each_year(querry, path, start_index=0, end_index=None)
                 # Remove new lines
                 description = description.replace('\n', ' ')
                 # print(f"Description: {description}")
-                
+
             Concluded_percentage = str(round((counter / search.num_found) * 100, 2))
-            
+
             if Concluded_percentage == '0.0':
                 Concluded_percentage = '000.01'
-            
+
             # If concluded_percentage has less than 6 digits, add leading zeros
             if len(Concluded_percentage) < 6:
                 Concluded_percentage = Concluded_percentage.zfill(6)
-                
+
             # If title is bigger than 100 characters, truncate it
             truncated_title = title if len(title) <= 100 else title[:100] + '...'
-            
+
             line = f"Item {counter_string} of {search.num_found} found. ({Concluded_percentage}%) -> Title: {truncated_title} | Mediatype: {mediatype}"
 
             # Add the current item metadata to the collection
@@ -247,10 +247,10 @@ def collection_downloader_each_year(querry, path, start_index=0, end_index=None)
                 'Ppi': ppi,
                 'Description': description
                 })
-            
+
             # Add the current item metadata to the collection
             collection_querry = pd.concat([collection_querry, new_Row.to_frame().T], ignore_index=True)
-            
+
             # Print the line
             print(line)
 
@@ -258,13 +258,13 @@ def collection_downloader_each_year(querry, path, start_index=0, end_index=None)
             # item.download(glob_pattern='*pdf', verbose=True, no_directory=True)
 
             counter += 1
-            
+
         except Exception as e:
             print(f"Error: {e}")
             pass
     return collection_querry
 
-################################################## AUXILIAR FUNCTIONS ##########################################################   
+################################################## AUXILIAR FUNCTIONS ##########################################################
 def equalize_char_number(smaller_number, bigger_number):
     # Add zeros to the smaller number until it has the same number of characters as the bigger number
     while len(smaller_number) < len(bigger_number):
@@ -286,7 +286,7 @@ def clear_screen():
         os.system('clear')
 
 def clear_querry_name(querry_name):
-    
+
     # Clear Querry Name
     querry_name = querry.replace('collection:', '')
     querry_name = querry_name.replace('languageSorter:', '')
@@ -299,44 +299,44 @@ def clear_querry_name(querry_name):
     querry_name = querry_name.replace(",", '')
     querry_name = querry_name.replace(".", '')
 
-    
+
     # Remove everything after @ in the querry name if it exists
     if '@' in querry_name:
         querry_name = querry_name.split('@')[0]
-        
+
     return querry_name
-    
+
 def savecollection_to_excel(collection, file_path):
-    
+
     # Save the collection to an excel file
     collection.to_excel(file_path, index=False)
-    
+
     print(f"Saving the Excel file to: {file_path}")
-    
+
     excel_writer = pd.ExcelWriter(file_path, engine='xlsxwriter')
-    
+
     collection.to_excel(excel_writer, sheet_name='Collection', index=False)
-    
+
     print("Saving the Excel file...")
-    
+
     excel_writer._save()
 
 def clear_dataframe(collection):
-    
+
     # If a collumns is empty, remove it
     for column in collection.columns:
         if collection[column].isnull().all():
             collection = collection.drop(column, axis=1)
-    
+
     return collection
 
 def skrape_livros_arquitetura():
-    
+
     # Create an array from 1400 to 1600
     years = [str(i) for i in range(1850, 1900)]
-            
+
     years_error = []
-    
+
     collection = pd.DataFrame()
     # Iterate through the years
     for year in years:
@@ -344,7 +344,7 @@ def skrape_livros_arquitetura():
         end_index = 30000
         try:
             now_collection_year = collection_downloader_each_year(f'subject:Brazil mediatype:texts year:{year}', './', start_index, end_index)
-            
+
             # Add them both to the collection
             collection = pd.concat([collection, now_collection_year])
 
@@ -355,31 +355,31 @@ def skrape_livros_arquitetura():
 
     # Remove duplicates
     collection = collection.drop_duplicates()
-    
-    # Get the last number of the years array 
+
+    # Get the last number of the years array
     last_year = years[-1]
     # Get the first number of the years array
     first_year = years[0]
-    
+
     if collection.empty:
         print("Collection is empty")
         return
-     
+
     # Save the collection to an excel file
     savecollection_to_excel(collection, f"C:\\Users\\gabriel.miranda\\Desktop\\Projetos\\Personal Github\\Archive-Skrapper\\Livros_subject_collection_{first_year}-{last_year}.xlsx")
     print("Years Error: ", years_error)
 
-################################################## MAIN LOOP ################################################################### 
+################################################## MAIN LOOP ###################################################################
 
 if __name__ == "__main__":
-            
+
     clear_screen()
-    
+
     print("Starting...")
 
     # skrape_livros_arquitetura()
-    
-    item = internetarchive.get_item('BloodLibelRitualMurder')
+
+    item = internetarchive.get_item('materialsdocumen08unse')
     for k, v in item.metadata.items():
         print(f"{k}:{v}")
     input("Press Enter to continue...")
@@ -398,7 +398,7 @@ if __name__ == "__main__":
         f'collection:imageboard_datasets',
         f'uploader:ruijpt@yahoo.com',
         f'uploader:librorumsanctorum@gmail.com mediatype:texts',
-        f'collection:fringe languageSorter:English mediatype:texts', 
+        f'collection:fringe languageSorter:English mediatype:texts',
         f'uploader:entyne16@gmx.us',
         f'uploader:igor.mueller@tutanota.com',
         f'uploader:entyne16@gmx.us',
@@ -435,36 +435,34 @@ if __name__ == "__main__":
         f'subject:"Decoração e ornamentos (arquitetura)"',
         f'collection:lost-telecourses',
         f'collection:comics subject:"Metal Hurlant"',
-
     ]
 
     querries = [
+        f'uploader:associate-ted-hornick@archive.org mediatype:texts',
         f'collection:fav-unfortunateson',
         f'uploader:contacttheorem@gmail.com',
         # f'uploader:station58.cebu@archive.org',
-        # f'collection:comics_inbox languageSorter:English mediatype:texts',
-        # f'collection:magazine_rack languageSorter:English mediatype:texts',                     # Magazine Rack [English]            Results Count: 183.218
         # f'collection:pulpmagazinearchive languageSorter:English mediatype:texts',               # Pulp Magazine Archive [English]    Results Count:  13.744
         # f'collection:opensource_movies languageSorter:English',                                 # OpenSource Movies [English]        Results Count: 293.266
         # ---------------------------------------------------------------------------------------------------------------------------------------------------------------
         ]
-          
+
 
     # Iterate through the querries
     for querry in querries:
 
         start_index = 0
-        
+
         end_index = 5000
-                
+
         collection = collection_downloader(querry, './', start_index, end_index)
 
         querry_name = clear_querry_name(querry)
-        
-        file_path = f"C:\\Users\\gabriel.miranda\\Desktop\\Projetos\\Personal Github\\Archive-Skrapper\\{querry_name}_{start_index}_{end_index}.xlsx"
+
+        file_path = f"C:\\Users\\ativw\\Desktop\\Projetos\\Gabriel Github\\Archive-Skrapper\\{querry_name}_{start_index}_{end_index}.xlsx"
 
         collection = clear_dataframe(collection)
-        
+
         # If dataframe is not empty, save it to an excel file
         if not collection.empty:
             savecollection_to_excel(collection, file_path)
@@ -472,24 +470,3 @@ if __name__ == "__main__":
 
 
 
-# 𝙍𝙚𝙨𝙚𝙖𝙧𝙘𝙝 𝘼𝙪𝙙𝙞𝙤 + 𝙋𝘿𝙁𝙨: https://bit.ly/PDFdump
-
-# 𝘾𝙝𝙞𝙡𝙙 𝘼𝙗𝙪𝙨𝙚 / 𝙃𝙪𝙢𝙖𝙣 𝙏𝙧𝙖𝙛𝙛𝙞𝙘𝙠𝙞𝙣𝙜 / 𝙍𝙞𝙩𝙪𝙖𝙡 𝘼𝙗𝙪𝙨𝙚 𝙋𝙡𝙖𝙮𝙡𝙞𝙨𝙩: https://youtube.com/playlist?list=PLQdiHk246wHtR5NqldSV43q4a-89namWt
-
-# 𝙃𝙚𝙖𝙡𝙩𝙝 & 𝙒𝙚𝙡𝙡𝙗𝙚𝙞𝙣𝙜 𝙋𝙡𝙖𝙮𝙡𝙞𝙨𝙩: https://youtube.com/playlist?list=PLQdiHk246wHurz6sjv-uK6oit2lvuADDC
-
-# 𝙃𝙞𝙨𝙩𝙤𝙧𝙮 𝙋𝙡𝙖𝙮𝙡𝙞𝙨𝙩: https://youtube.com/playlist?list=PLQdiHk246wHtb9Zlafs15J7v1fmZys5BF
-
-# 𝙃𝙤𝙡𝙡𝙮𝙬𝙤𝙤𝙙 / 𝙈𝙪𝙨𝙞𝙘 𝙄𝙣𝙙𝙪𝙨𝙩𝙧𝙮 / 𝙈𝙖𝙞𝙣𝙨𝙩𝙧𝙚𝙖𝙢 & 𝙎𝙤𝙘𝙞𝙖𝙡 𝙈𝙚𝙙𝙞𝙖 𝙋𝙡𝙖𝙮𝙡𝙞𝙨𝙩: https://youtube.com/playlist?list=PLQdiHk246wHsaQJ-8EcWHWgpNhbBqi5jM
-
-# 𝙅𝙚𝙨𝙪𝙞𝙩𝙨 (𝙎𝙤𝙘𝙞𝙚𝙩𝙮 𝙤𝙛 𝙅𝙚𝙨𝙪𝙨) 𝙋𝙡𝙖𝙮𝙡𝙞𝙨𝙩: https://youtube.com/playlist?list=PLQdiHk246wHsRz2Bw_B642XTf-22LHGCV
-
-# 𝙈𝙖𝙣𝙡𝙮 𝙋. 𝙃𝙖𝙡𝙡 𝙋𝙡𝙖𝙮𝙡𝙞𝙨𝙩: https://youtube.com/playlist?list=PLQdiHk246wHsKNfoF_i9cs53WP1x2ZBbO
-
-# 𝙍𝙚𝙖𝙡𝙞𝙩𝙮 𝘾𝙝𝙚𝙘𝙠 (𝙋𝙚𝙧𝙨𝙥𝙚𝙘𝙩𝙞𝙫𝙚) 𝙋𝙡𝙖𝙮𝙡𝙞𝙨𝙩: https://youtube.com/playlist?list=PLQdiHk246wHv-ZReEJDv_9dLOLQOwughq
-
-# 𝙍𝙚𝙡𝙞𝙜𝙞𝙤𝙣 / 𝙏𝙝𝙚𝙤𝙡𝙤𝙜𝙮 𝙋𝙡𝙖𝙮𝙡𝙞𝙨𝙩: https://youtube.com/playlist?list=PLQdiHk246wHtvo0YoF7zwDLZYxUkC2lyn
-
-# 𝙎𝙚𝙘𝙧𝙚𝙩𝙨 𝙄𝙣 𝙋𝙡𝙖𝙞𝙣 𝙎𝙞𝙜𝙝𝙩 𝙋𝙡𝙖𝙮𝙡𝙞𝙨𝙩: https://youtube.com/playlist?list=PLQdiHk246wHujBQown4BVcDxQtXZz-VRL
-
-# 𝙎𝙪𝙧𝙫𝙞𝙫𝙤𝙧𝙨 𝙤𝙛 𝘼𝙩𝙡𝙖𝙣𝙩𝙞𝙨 𝙋𝙡𝙖𝙮𝙡𝙞𝙨𝙩: https://youtube.com/playlist?list=PLQdiHk246wHtdN1bQeuJVLmJcj4FbQ_QG
