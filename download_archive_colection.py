@@ -150,10 +150,10 @@ def collection_downloader(querry, path, start_index=0, end_index=None):
             pass
     return collection_querry
 
-
 ################################################## AUXILIAR FUNCTIONS ##########################################################
 def equalize_char_number(smaller_number, bigger_number):
     # Add zeros to the smaller number until it has the same number of characters as the bigger number
+    
     while len(smaller_number) < len(bigger_number):
         smaller_number = '0' + smaller_number
     return smaller_number
@@ -230,7 +230,7 @@ if __name__ == "__main__":
 
     # https://archive.org/details/pulpmagazinearchive
 
-    item = internetarchive.get_item('rene-guenon-the-destiny-of-freemasonry-denys-roman-berserker-books-final')
+    item = internetarchive.get_item('mundo-estranho-32-outubro-2004')
     for k, v in item.metadata.items():
         print(f"{k}:{v}")
     input("Press Enter to continue...")
@@ -296,7 +296,10 @@ if __name__ == "__main__":
     ]
 
     querries = [
-        'uploader:gisudioastrn@tuta.io',  # Gisudio Astron
+        'collection:mundoestranho',
+        f'subject:Mundo Estranho',
+        f'subject:Mundo+Estranho',
+        # 'uploader:gisudioastrn@tuta.io',  # Gisudio Astron
         # f'uploader:station58.cebu@archive.org',
         # f'collection:pulpmagazinearchive languageSorter:English mediatype:texts',               # Pulp Magazine Archive [English]    Results Count:  13.744
         # f'collection:opensource_movies languageSorter:English',                                 # OpenSource Movies [English]        Results Count: 293.266
