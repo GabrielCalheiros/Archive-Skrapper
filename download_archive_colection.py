@@ -230,7 +230,7 @@ if __name__ == "__main__":
 
     # https://archive.org/details/pulpmagazinearchive
 
-    item = internetarchive.get_item('mundo-estranho-32-outubro-2004')
+    item = internetarchive.get_item('keith-jim-mind-control-world-control-1997')
     for k, v in item.metadata.items():
         print(f"{k}:{v}")
     input("Press Enter to continue...")
@@ -293,12 +293,15 @@ if __name__ == "__main__":
         f'collection:weirdtalesmagazine',
         f'collection:amazingstoriesmagazine',
         f'subject:"Jacques Vallée"',
+        f'collection:mundoestranho',
+        f'subject:Mundo Estranho',
+        f'subject:Mundo+Estranho',
+        f'uploader:TheKingGB12@gmail.com',
     ]
 
     querries = [
-        'collection:mundoestranho',
-        f'subject:Mundo Estranho',
-        f'subject:Mundo+Estranho',
+        f'uploader: Ariervintend1951@cuvox.de',
+        f'creator: Eustace Clarence mediatype:texts',
         # 'uploader:gisudioastrn@tuta.io',  # Gisudio Astron
         # f'uploader:station58.cebu@archive.org',
         # f'collection:pulpmagazinearchive languageSorter:English mediatype:texts',               # Pulp Magazine Archive [English]    Results Count:  13.744
