@@ -55,7 +55,6 @@ def collection_downloader(querry, path, start_index=0, end_index=None):
             ocr_detected_lang = page_number_confidence = originalurl = publisher = ppi = None
             source = director = runtime = format = closed_captioning = description = None
 
-
             if 'ocr_detected_lang' in item.metadata:
                 ocr_detected_lang = str(item.metadata['ocr_detected_lang'])
             else:
@@ -230,7 +229,7 @@ if __name__ == "__main__":
 
     # https://archive.org/details/pulpmagazinearchive
 
-    item = internetarchive.get_item('keith-jim-mind-control-world-control-1997')
+    item = internetarchive.get_item('jesus-last-of-the-pharoahs-book-ralph-ellis')
     for k, v in item.metadata.items():
         print(f"{k}:{v}")
     input("Press Enter to continue...")
@@ -300,8 +299,7 @@ if __name__ == "__main__":
     ]
 
     querries = [
-        f'uploader: Ariervintend1951@cuvox.de',
-        f'creator: Eustace Clarence mediatype:texts',
+        f'uploader: uploader:contacttheorem@gmail.com',
         # 'uploader:gisudioastrn@tuta.io',  # Gisudio Astron
         # f'uploader:station58.cebu@archive.org',
         # f'collection:pulpmagazinearchive languageSorter:English mediatype:texts',               # Pulp Magazine Archive [English]    Results Count:  13.744
@@ -320,7 +318,7 @@ if __name__ == "__main__":
 
         querry_name = clear_querry_name(querry)
 
-        file_path = f"C:\\Users\\ativw\\Desktop\\Projetos\\Gabriel Github\\Archive-Skrapper\\{querry_name}_{start_index}_{end_index}.xlsx"
+        file_path = f"D:\\Github\\Archive-Skrapper\\{querry_name}_{start_index}_{end_index}.xlsx"
 
         collection = clear_dataframe(collection)
 
