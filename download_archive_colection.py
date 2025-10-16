@@ -185,7 +185,6 @@ def clear_querry_name(querry_name):
     querry_name = querry_name.replace(",", '')
     querry_name = querry_name.replace(".", '')
 
-
     # Remove everything after @ in the querry name if it exists
     if '@' in querry_name:
         querry_name = querry_name.split('@')[0]
@@ -229,7 +228,7 @@ if __name__ == "__main__":
 
     # https://archive.org/details/pulpmagazinearchive
 
-    item = internetarchive.get_item('jesus-last-of-the-pharoahs-book-ralph-ellis')
+    item = internetarchive.get_item('i.-book-history-andrew-stenimetz-the-history-of-the-jesuits-volume-01')
     for k, v in item.metadata.items():
         print(f"{k}:{v}")
     input("Press Enter to continue...")
@@ -296,10 +295,11 @@ if __name__ == "__main__":
         f'subject:Mundo Estranho',
         f'subject:Mundo+Estranho',
         f'uploader:TheKingGB12@gmail.com',
+        f'uploader: uploader:contacttheorem@gmail.com',
     ]
 
     querries = [
-        f'uploader: uploader:contacttheorem@gmail.com',
+        f'uploader:schuster.laura@live.at',
         # 'uploader:gisudioastrn@tuta.io',  # Gisudio Astron
         # f'uploader:station58.cebu@archive.org',
         # f'collection:pulpmagazinearchive languageSorter:English mediatype:texts',               # Pulp Magazine Archive [English]    Results Count:  13.744
