@@ -152,7 +152,7 @@ def collection_downloader(querry, path, start_index=0, end_index=None):
 ################################################## AUXILIAR FUNCTIONS ##########################################################
 def equalize_char_number(smaller_number, bigger_number):
     # Add zeros to the smaller number until it has the same number of characters as the bigger number
-    
+
     while len(smaller_number) < len(bigger_number):
         smaller_number = '0' + smaller_number
     return smaller_number
@@ -180,6 +180,7 @@ def clear_querry_name(querry_name):
     querry_name = querry_name.replace('uploader:', '')
     querry_name = querry_name.replace('creator:', '')
     querry_name = querry_name.replace('subject:', '')
+    querry_name = querry_name.replace('title:', '')
     querry_name = querry_name.replace(' ', '')
     querry_name = querry_name.replace('"', '')
     querry_name = querry_name.replace(",", '')
@@ -228,7 +229,7 @@ if __name__ == "__main__":
 
     # https://archive.org/details/pulpmagazinearchive
 
-    item = internetarchive.get_item('i.-book-history-andrew-stenimetz-the-history-of-the-jesuits-volume-01')
+    item = internetarchive.get_item('the-occult-roots-of-bolshevism-and-their-ramifications-berserker-books')
     for k, v in item.metadata.items():
         print(f"{k}:{v}")
     input("Press Enter to continue...")
@@ -299,7 +300,7 @@ if __name__ == "__main__":
     ]
 
     querries = [
-        f'uploader:schuster.laura@live.at',
+        f'uploader:BerserkerBooks@protonmail.com',
         # 'uploader:gisudioastrn@tuta.io',  # Gisudio Astron
         # f'uploader:station58.cebu@archive.org',
         # f'collection:pulpmagazinearchive languageSorter:English mediatype:texts',               # Pulp Magazine Archive [English]    Results Count:  13.744
@@ -318,9 +319,11 @@ if __name__ == "__main__":
 
         querry_name = clear_querry_name(querry)
 
-        file_path = f"D:\\Github\\Archive-Skrapper\\{querry_name}_{start_index}_{end_index}.xlsx"
+        # file_path = f"D:\\Github\\Archive-Skrapper\\{querry_name}_{start_index}_{end_index}.xlsx"
+        file_path = f"C:\\Users\\ativw\\Desktop\\Projetos\\{querry_name}_{start_index}_{end_index}.xlsx"
 
         collection = clear_dataframe(collection)
+
 
         # If dataframe is not empty, save it to an excel file
         if not collection.empty:
