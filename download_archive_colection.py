@@ -324,7 +324,6 @@ if __name__ == "__main__":
 
         collection = clear_dataframe(collection)
 
-
         # If dataframe is not empty, save it to an excel file
         if not collection.empty:
             savecollection_to_excel(collection, file_path)
