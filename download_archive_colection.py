@@ -228,7 +228,7 @@ if __name__ == "__main__":
 
     # https://archive.org/details/pulpmagazinearchive
 
-    item = internetarchive.get_item('the-occult-roots-of-bolshevism-and-their-ramifications-berserker-books')
+    item = internetarchive.get_item('Banned_v01n01_1963.Bonanza_DDT_zine')
     for k, v in item.metadata.items():
         print(f"{k}:{v}")
     input("Press Enter to continue...")
@@ -299,7 +299,7 @@ if __name__ == "__main__":
     ]
 
     querries = [
-        f'uploader:BerserkerBooks@protonmail.com',
+        f'collection:trashpulp',
         # 'uploader:gisudioastrn@tuta.io',  # Gisudio Astron
         # f'uploader:station58.cebu@archive.org',
         # f'collection:pulpmagazinearchive languageSorter:English mediatype:texts',               # Pulp Magazine Archive [English]    Results Count:  13.744
